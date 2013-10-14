@@ -17,18 +17,21 @@ public class Board {
 	}
 
 	public void displayBoard() {
-
+		System.out.println();
+		if (row1 == 0)
 			System.out.println();
 		for (int i = 0; i < row1; i++) {
 			System.out.print("*");
 		}
 		System.out.println();
-
+		if (row2 == 0)
+			System.out.println();
 		for (int i = 0; i < row2; i++) {
 			System.out.print("*");
 		}
 		System.out.println();
-
+		if (row3 == 0)
+			System.out.println();
 		for (int i = 0; i < row3; i++) {
 			System.out.print("*");
 		}
