@@ -1,5 +1,6 @@
 package nim;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NimRunner {
@@ -15,12 +16,18 @@ public class NimRunner {
     {
         input = new Scanner(System.in);
         System.out.println("Please choose a game mode:\n[1]Human vs Human\n[2]Human vs Computer\n[3]Computer vs Computer\n[4]Learn\n[0]Exit");
-        int choice = input.nextInt();
+        int choice = -1;
 
         boolean done = false;
         while(!done)
         {
             done = true;
+
+            try{choice = input.nextInt();}
+            catch(Exception e)
+            {
+                choice = -1;
+            }
 
             switch(choice)
             {
@@ -34,7 +41,7 @@ public class NimRunner {
                     HvC();
                     break;
                 case(3):
-                    System.out.println("How many ames would you like the game to play?");
+                    System.out.println("How many games would you like the game to play?");
                     int games = input.nextInt();
                     CvC(games);
                     break;
@@ -51,6 +58,7 @@ public class NimRunner {
 
     public static void HvH()
     {
+        Player p1 = new Player("1"), p2 = new Player("2");
         boolean isRunning = true, turn = true;
         Board board = new Board();
 
@@ -61,61 +69,15 @@ public class NimRunner {
                 System.out.println("Game over! Player " + (turn?"1 ":"2 ") + "wins!");
                 isRunning = false;
             }
+            else if(turn)
+            {
+                board = p1.takeTurn(board);
+                turn = turn?false:true;
+            }
             else
             {
-                int row, x;
-                board.displayBoard();
-                System.out.println("Player " + (turn?"1's ":"2's ") + "turn! Please choose a row(1, 2, or 3):");
-                while(true)
-                {
-                    try
-                    {
-                        row = input.nextInt();
-                        if(row > 3 || row < 1)
-                            throw new Exception();
-
-                        if(board.getRow(row) == 0)
-                        {
-                            System.out.println("That row is already empty! Please try another.");
-                            throw new Exception();
-                        }
-
-
-                        break;
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer 1, 2, or 3:");
-                    }
-                }
-
-                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
-                while(true)
-                {
-                    try
-                    {
-                        x = input.nextInt();
-                        if(x > 0 && x <= board.getRow(row))
-                        {
-                            board.makeMove(row, x);
-                            System.out.println(x + " removed from row " + row + ".");
-                            turn = turn?false:true;
-                        }
-                        else
-                        {
-                            throw new Exception();
-                        }
-
-                        break;
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
-                    }
-                }
-
+                board = p2.takeTurn(board);
+                turn = turn?false:true;
             }
         }
         runMenu();
@@ -123,8 +85,10 @@ public class NimRunner {
 
     public static void HvC()
     {
+        Player p = new Player("Player");
         boolean isRunning = true, turn = true;
         Board board = new Board();
+        ArrayList<Board> boards = new ArrayList<Board>();
 
         while(isRunning)
         {
@@ -132,61 +96,16 @@ public class NimRunner {
             {
                 System.out.println("Game over! " + (turn?"Player ":"Computer ") + "wins!");
                 isRunning = false;
+                for(Board b : boards)
+                {
+                    comp.learnStuff(b, turn);
+                    turn = turn?false:true;
+                }
             }
             else if(turn)
             {
-                int row, x;
-                board.displayBoard();
-                System.out.println("Players turn! Please choose a row(1, 2, or 3):");
-                while(true)
-                {
-                    try
-                    {
-                        row = input.nextInt();
-                        if(row > 3 || row < 1)
-                            throw new Exception();
-
-                        if(board.getRow(row) == 0)
-                        {
-                            System.out.println("That row is already empty! Please try another.");
-                            throw new Exception();
-                        }
-
-
-                        break;
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer 1, 2, or 3:");
-                    }
-                }
-
-                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
-                while(true)
-                {
-                    try
-                    {
-                        x = input.nextInt();
-                        if(x > 0 && x <= board.getRow(row))
-                        {
-                            board.makeMove(row, x);
-                            System.out.println(x + " removed from row " + row + ".");
-                            turn = turn?false:true;
-                        }
-                        else
-                        {
-                            throw new Exception();
-                        }
-
-                        break;
-                    }
-                    catch(Exception e)
-                    {
-                        System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
-                    }
-                }
+                board = p.takeTurn(board);
+                turn = turn?false:true;
             }
             else
             {
@@ -194,8 +113,12 @@ public class NimRunner {
                 Board oldBoard = board;
                 board = comp.makeMove(board);
                 turn = turn?false:true;
+                board.displayChanges(oldBoard);
                 System.out.println("Computer Turn Completed");
             }
+
+
+            boards.add(board);
         }
         runMenu();
     }
@@ -204,6 +127,7 @@ public class NimRunner {
     {
         boolean isRunning = true, turn = true;
         Board board = new Board();
+        ArrayList<Board> boards = new ArrayList<Board>();
 
         for(int i = 0; i < games; i++)
         {
@@ -216,6 +140,12 @@ public class NimRunner {
                 {
                     System.out.println("\nGame over! " + (turn?"Computer1 ":"Computer2 ") + "wins!\n");
                     isRunning = false;
+                    for(Board b : boards)
+                    {
+                        comp2.learnStuff(b, turn);
+                        turn = turn?false:true;
+                        comp.learnStuff(b, turn);
+                    }
                 }
                 else if(turn)
                 {
@@ -235,6 +165,7 @@ public class NimRunner {
                     board.displayChanges(oldBoard);
                     System.out.println("Computer 2 Turn Completed");
                 }
+                boards.add(board);
             }
         }
         runMenu();
