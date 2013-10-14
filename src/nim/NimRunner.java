@@ -28,7 +28,7 @@ public class NimRunner {
                     System.exit(0);
                     break;
                 case(1):
-                    HvH();
+                    HvM();
                     break;
                 case(2):
                     HvC();
@@ -49,7 +49,7 @@ public class NimRunner {
         }
     }
 
-    public static void HvH()
+    public static void HvM()
     {
         boolean isRunning = true, turn = true;
         Board board = new Board();
