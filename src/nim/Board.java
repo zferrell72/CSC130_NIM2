@@ -1,6 +1,6 @@
 package nim;
 
-public class Board {
+public class Something {
 	private int row1, row2, row3;
 	public static final int ROW1 = 1, ROW2 = 2, ROW3 = 3;
 
