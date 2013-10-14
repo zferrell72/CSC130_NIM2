@@ -1,4 +1,4 @@
-package csc;
+package nim;
 
 import java.util.Scanner;
 
