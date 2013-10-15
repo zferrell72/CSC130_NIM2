@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Player {
 	private String name;
-	private static Scanner input;
+	private static Scanner input = new Scanner(System.in);
 	
 	public Player(String name)
 	{
