@@ -17,7 +17,7 @@ public class Board {
 	}
 
 	public void displayBoard() {
-		System.out.println();
+		addPadding(1);
 
 		for (int i = 0; i < row1; i++) {
 			System.out.print("*");
@@ -32,8 +32,15 @@ public class Board {
 		for (int i = 0; i < row3; i++) {
 			System.out.print("*");
 		}
-		System.out.println("\n");
+		addPadding(2);
 	}
+
+    private void addPadding(int lines) {
+        for (int i = 0; i < lines; i++) {
+            System.out.print("\n");
+        }
+    }
+
 
 	public boolean isOver() {
 		if (row1 == 0 && row2 == 0 && row3 == 0) {
