@@ -14,14 +14,16 @@ public class NimRunner {
     public static void runMenu()
     {
         input = new Scanner(System.in);
+        // Turn into array of strings
         System.out.println("Please choose a game mode:\n[1]Human vs Human\n[2]Human vs Computer\n[3]Computer vs Computer\n[4]Learn\n[0]Exit");
+        // Use length of the array for max input
         int choice = input.nextInt();
 
         boolean done = false;
         while(!done)
         {
             done = true;
-
+            // Make array of operations
             switch(choice)
             {
                 case(0):
@@ -74,7 +76,7 @@ public class NimRunner {
                         if(row > 3 || row < 1)
                             throw new Exception();
 
-                        if(board.getRow(row) == 0)
+                        if(board.getRows()[row - 1] == 0)
                         {
                             System.out.println("That row is already empty! Please try another.");
                             throw new Exception();
@@ -90,13 +92,13 @@ public class NimRunner {
                     }
                 }
 
-                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
+                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRows()[row - 1]);
                 while(true)
                 {
                     try
                     {
                         x = input.nextInt();
-                        if(x > 0 && x <= board.getRow(row))
+                        if(x > 0 && x <= board.getRows()[row - 1])
                         {
                             board.makeMove(row, x);
                             System.out.println(x + " removed from row " + row + ".");
@@ -112,7 +114,7 @@ public class NimRunner {
                     catch(Exception e)
                     {
                         System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRows()[row - 1]);
                     }
                 }
 
@@ -146,7 +148,7 @@ public class NimRunner {
                         if(row > 3 || row < 1)
                             throw new Exception();
 
-                        if(board.getRow(row) == 0)
+                        if(board.getRows()[row - 1] == 0)
                         {
                             System.out.println("That row is already empty! Please try another.");
                             throw new Exception();
@@ -162,13 +164,13 @@ public class NimRunner {
                     }
                 }
 
-                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
+                System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRows()[row - 1]);
                 while(true)
                 {
                     try
                     {
                         x = input.nextInt();
-                        if(x > 0 && x <= board.getRow(row))
+                        if(x > 0 && x <= board.getRows()[row - 1])
                         {
                             board.makeMove(row, x);
                             System.out.println(x + " removed from row " + row + ".");
@@ -178,20 +180,18 @@ public class NimRunner {
                         {
                             throw new Exception();
                         }
-
                         break;
                     }
                     catch(Exception e)
                     {
                         System.err.println("Invalid Input");
-                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+                        System.out.println("You goofed. Please choose an integer between 1 and " + board.getRows()[row - 1]);
                     }
                 }
             }
             else
             {
                 System.out.println("Computer Turn in Progress");
-                Board oldBoard = board;
                 board = comp.makeMove(board);
                 turn = turn?false:true;
                 System.out.println("Computer Turn Completed");

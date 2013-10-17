@@ -24,7 +24,7 @@ public class Player {
 				if(row > 3 || row < 1)
 					throw new Exception();
 				
-				if(board.getRow(row) == 0)
+				if(board.getRows()[row - 1] == 0)
 				{
 					System.out.println("That row is already empty! Please try another.");
 					throw new Exception();
@@ -40,13 +40,13 @@ public class Player {
 			}
 		}
 		
-		System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
+		System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRows()[row - 1]);
 		while(true)
 		{
 			try
 			{
 				x = input.nextInt();
-				if(x > 0 && x <= board.getRow(row))
+				if(x > 0 && x <= board.getRows()[row - 1])
 				{
 					board.makeMove(row, x);
 					System.out.println(x + " removed from row " + row + ".");
@@ -61,7 +61,7 @@ public class Player {
 			catch(Exception e)
 			{
 				System.err.println("Invalid Input");
-				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRows()[row - 1]);
 			}
 		}
 		return board;

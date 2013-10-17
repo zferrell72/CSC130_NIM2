@@ -24,12 +24,12 @@ public class Computer {
 	private ArrayList<Board> generatePossibleMoves(Board theBoard){
 		ArrayList<Board> possibleMoves = new ArrayList<Board>();
 		
-		for(int i = (theBoard.getRow1() - 1); i >= 0; i--)
-			possibleMoves.add(new Board(i, theBoard.getRow2(), theBoard.getRow3()));
-		for(int i = (theBoard.getRow2() - 1); i >= 0; i--)
-			possibleMoves.add(new Board(theBoard.getRow1(), i, theBoard.getRow3()));
-		for(int i = (theBoard.getRow3() - 1); i >= 0; i--)
-			possibleMoves.add(new Board(theBoard.getRow1(), theBoard.getRow2(), i));
+		for(int i = (theBoard.getRows()[0] - 1); i >= 0; i--)
+			possibleMoves.add(new Board(i, theBoard.getRows()[1], theBoard.getRows()[2]));
+		for(int i = (theBoard.getRows()[1] - 1); i >= 0; i--)
+			possibleMoves.add(new Board(theBoard.getRows()[0], i, theBoard.getRows()[2]));
+		for(int i = (theBoard.getRows()[2] - 1); i >= 0; i--)
+			possibleMoves.add(new Board(theBoard.getRows()[0], theBoard.getRows()[1], i));
 		
 		return possibleMoves;
 	}

@@ -1,35 +1,38 @@
 package nim;
 
 public class Board {
-	private int row1, row2, row3;
+	
+	private int[] rows = {3, 5, 7};
+	
+	
 	public static final int ROW1 = 1, ROW2 = 2, ROW3 = 3;
 
-	public Board() {
-		row1 = 3;
-		row2 = 5;
-		row3 = 7;
-	}
+	public Board() {}
 
 	public Board(int i, int j, int k) {
-		row1 = i;
-		row2 = j;
-		row3 = k;
+		rows[0] = i;
+		rows[1] = j;
+		rows[2] = k;
 	}
-
+	
+	public int[] getRows(){
+		return rows;
+	}
+	
 	public void displayBoard() {
 		addPadding(1);
 
-		for (int i = 0; i < row1; i++) {
+		for (int i = 0; i < rows[0]; i++) {
 			System.out.print("*");
 		}
-		System.out.println();
+		addPadding(1);
 
-		for (int i = 0; i < row2; i++) {
+		for (int i = 0; i < rows[1]; i++) {
 			System.out.print("*");
 		}
-		System.out.println();
+		addPadding(1);
 
-		for (int i = 0; i < row3; i++) {
+		for (int i = 0; i < rows[2]; i++) {
 			System.out.print("*");
 		}
 		addPadding(2);
@@ -43,74 +46,38 @@ public class Board {
 
 
 	public boolean isOver() {
-		if (row1 == 0 && row2 == 0 && row3 == 0) {
-			return true;
-		} else {
-			return false;
+		boolean isOver = true;
+		for(int i = 0; i < rows.length && isOver; i++){
+			isOver = (rows[i] == 0);
 		}
+		return isOver;
 	}
 
-	public void displayChanges(Board b) {
-		if (b.getRow1() != this.getRow1()) {
-			if (b.getRow1() > this.getRow1()) {
-				System.out.println((b.getRow1() - this.getRow1())
-						+ " removed from row 1");
-			} else {
-				System.out.println((this.getRow1() - b.getRow1())
-						+ " removed from row 1");
-			}
-		} else if (b.getRow2() != this.getRow2()) {
-			if (b.getRow2() > this.getRow2()) {
-				System.out.println((b.getRow2() - this.getRow2())
-						+ " removed from row 2");
-			} else {
-				System.out.println((this.getRow2() - b.getRow2())
-						+ " removed from row 2");
-			}
-		} else if (b.getRow3() != this.getRow3()) {
-			if (b.getRow3() > this.getRow3()) {
-				System.out.println((b.getRow3() - this.getRow3())
-						+ " removed from row 3");
-			} else {
-				System.out.println((this.getRow3() - b.getRow3())
-						+ " removed from row 3");
-			}
-		} else {
+	public void displayChanges(Board oldBoard) {
+		if (oldBoard.rows[0] > this.rows[0]) {
+			System.out.println((oldBoard.rows[0] - this.rows[0]) + " removed from row 1");
+		}
+		else if (oldBoard.rows[1] > this.rows[1]) {
+			System.out.println((oldBoard.rows[1] - this.rows[1]) + " removed from row 2");
+		}
+		else if (oldBoard.rows[2] > this.rows[2]) {
+			System.out.println((oldBoard.rows[2] - this.rows[2]) + " removed from row 3");
+		}
+		else {
 			System.out.println("No change!");
 		}
 	}
 
 	public void makeMove(int i, int x) {
 		if (i == ROW1) {
-			row1 -= x;
+			rows[0] -= x;
 		} else if (i == ROW2) {
-			row2 -= x;
+			rows[1] -= x;
 		} else if (i == ROW3) {
-			row3 -= x;
+			rows[2] -= x;
 		} else {
 			System.err.println("INVALID INPUT");
 		}
 	}
 
-	public int getRow(int i) {
-		if (i == ROW1) {
-			return row1;
-		} else if (i == ROW2) {
-			return row2;
-		} else {
-			return row3;
-		}
-	}
-
-	public int getRow1() {
-		return row1;
-	}
-
-	public int getRow2() {
-		return row2;
-	}
-
-	public int getRow3() {
-		return row3;
-	}
 }
