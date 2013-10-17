@@ -26,8 +26,10 @@ public class Computer {
 		
 		for(int i = (theBoard.getRows()[0] - 1); i >= 0; i--)
 			possibleMoves.add(new Board(i, theBoard.getRows()[1], theBoard.getRows()[2]));
+		
 		for(int i = (theBoard.getRows()[1] - 1); i >= 0; i--)
 			possibleMoves.add(new Board(theBoard.getRows()[0], i, theBoard.getRows()[2]));
+		
 		for(int i = (theBoard.getRows()[2] - 1); i >= 0; i--)
 			possibleMoves.add(new Board(theBoard.getRows()[0], theBoard.getRows()[1], i));
 		

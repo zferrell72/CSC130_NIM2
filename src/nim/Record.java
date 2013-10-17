@@ -18,14 +18,7 @@ public class Record {
 		if(isWin)
 			win++;
 		
-		if(win != 0)
-		{
-			winRate = win/occur;
-		}
-		else
-		{
-			winRate = 0;
-		}
+		winRate = (win != 0)? (win/occur) : 0;
 	}
 	
 	public int getOccur()

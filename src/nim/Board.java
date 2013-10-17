@@ -3,9 +3,6 @@ package nim;
 public class Board {
 	
 	private int[] rows = {3, 5, 7};
-	
-	
-	public static final int ROW1 = 1, ROW2 = 2, ROW3 = 3;
 
 	public Board() {}
 
@@ -19,21 +16,12 @@ public class Board {
 		return rows;
 	}
 	
-	public void displayBoard() {
-		addPadding(1);
-
-		for (int i = 0; i < rows[0]; i++) {
-			System.out.print("*");
-		}
-		addPadding(1);
-
-		for (int i = 0; i < rows[1]; i++) {
-			System.out.print("*");
-		}
-		addPadding(1);
-
-		for (int i = 0; i < rows[2]; i++) {
-			System.out.print("*");
+	public void displayBoard() {		
+		for(int row: rows){
+			addPadding(1);
+			for(int i = 0; i < row; i++){
+				System.out.println("*");
+			}
 		}
 		addPadding(2);
 	}
@@ -69,15 +57,7 @@ public class Board {
 	}
 
 	public void makeMove(int i, int x) {
-		if (i == ROW1) {
-			rows[0] -= x;
-		} else if (i == ROW2) {
-			rows[1] -= x;
-		} else if (i == ROW3) {
-			rows[2] -= x;
-		} else {
-			System.err.println("INVALID INPUT");
-		}
+		rows[i] -= x;
 	}
 
 }
