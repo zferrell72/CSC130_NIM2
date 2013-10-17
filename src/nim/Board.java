@@ -20,7 +20,7 @@ public class Board {
 		for(int row: rows){
 			addPadding(1);
 			for(int i = 0; i < row; i++){
-				System.out.println("*");
+				System.out.print("*");
 			}
 		}
 		addPadding(2);

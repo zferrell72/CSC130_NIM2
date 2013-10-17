@@ -172,7 +172,7 @@ public class NimRunner {
                         x = input.nextInt();
                         if(x > 0 && x <= board.getRows()[row - 1])
                         {
-                            board.makeMove(row, x);
+                            board.makeMove(row - 1, x);
                             System.out.println(x + " removed from row " + row + ".");
                             turn = turn?false:true;
                         }
