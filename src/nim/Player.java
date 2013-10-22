@@ -11,12 +11,12 @@ public class Player {
 		this.name = name;
 	}
 	
-	public Board takeTurn(Board board)
+	public int getRowInput(Board board)
 	{
-		int row, x;
-		board.displayBoard();
-		System.out.println("Player " + name + "'s turn! Please choose a row(1, 2, or 3):");
-		while(true)
+		boolean inputIsValid = false;
+		int row = 0;
+		
+		while(!inputIsValid)
 		{
 			try
 			{
@@ -29,34 +29,8 @@ public class Player {
 					System.out.println("That row is already empty! Please try another.");
 					throw new Exception();
 				}
-					
-					
-				break;
-			}
-			catch(Exception e)
-			{
-				System.err.println("Invalid Input");
-				System.out.println("You goofed. Please choose an integer 1, 2, or 3:");
-			}
-		}
-		
-		System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
-		while(true)
-		{
-			try
-			{
-				x = input.nextInt();
-				if(x > 0 && x <= board.getRow(row))
-				{
-					board.makeMove(row, x);
-					System.out.println(x + " removed from row " + row + ".");
-				}
-				else
-				{
-					throw new Exception();
-				}
 				
-				break;
+				inputIsValid = true;
 			}
 			catch(Exception e)
 			{
@@ -64,6 +38,47 @@ public class Player {
 				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
 			}
 		}
+		
+		return row;
+	}
+	
+	public int getXInput(int row, Board board)
+	{
+		boolean inputIsValid = false;
+		int x = 0;
+		
+		while(!inputIsValid)
+		{
+			try
+			{
+				x = input.nextInt();
+				if(x < 0 || x > board.getRow(row))
+				{
+					throw new Exception();
+				}
+				
+				inputIsValid = true;
+			}
+			catch(Exception e)
+			{
+				System.err.println("Invalid Input");
+				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+			}
+		}
+		return x;
+	}
+	
+	public Board takeTurn(Board board)
+	{
+		int row, x;
+		board.displayBoard();
+		System.out.println("Player " + name + "'s turn! Please choose a row(1, 2, or 3):");
+		row = getRowInput(board);
+		System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRow(row));
+		x = getXInput(row, board);
+		
+		board.makeMove(row, x);
+		
 		return board;
 	}
 }
