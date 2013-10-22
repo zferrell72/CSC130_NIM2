@@ -1,11 +1,19 @@
 package nim;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NimRunner {
         private static Scanner input;
         private static Computer comp = new Computer(), comp2 = new Computer();
+        
+        private enum Operations {
+        	HUMAN_HUMAN,
+        	HUMAN_COMP,
+        	COMP_COMP,
+        	LEARN;
+        }
 
         public static void main(String args[])
         {
@@ -24,7 +32,7 @@ public class NimRunner {
                         done = true;
                         
                         try{choice = input.nextInt();}
-                        catch(Exception e)
+                        catch(InputMismatchException e)
                         {
                                 choice = -1;
                         }

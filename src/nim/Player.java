@@ -40,6 +40,7 @@ public class Player {
 			}
 		}
 		
+		
 		System.out.println("You have chosen row " + row + ". Now please choose a number to remove between 1 and " + board.getRows()[row - 1]);
 		while(true)
 		{

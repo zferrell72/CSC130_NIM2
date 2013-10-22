@@ -3,13 +3,14 @@ package nim;
 public class Board {
 	
 	private int[] rows = {3, 5, 7};
+	public static final int TOP = 0, MID = 1, LOW = 2;
 
 	public Board() {}
 
 	public Board(int i, int j, int k) {
-		rows[0] = i;
-		rows[1] = j;
-		rows[2] = k;
+		rows[TOP] = i;
+		rows[MID] = j;
+		rows[LOW] = k;
 	}
 	
 	public int[] getRows(){
@@ -42,14 +43,14 @@ public class Board {
 	}
 
 	public void displayChanges(Board oldBoard) {
-		if (oldBoard.rows[0] > this.rows[0]) {
-			System.out.println((oldBoard.rows[0] - this.rows[0]) + " removed from row 1");
+		if (oldBoard.rows[TOP] > this.rows[TOP]) {
+			System.out.println((oldBoard.rows[TOP] - this.rows[TOP]) + " removed from row 1");
 		}
-		else if (oldBoard.rows[1] > this.rows[1]) {
-			System.out.println((oldBoard.rows[1] - this.rows[1]) + " removed from row 2");
+		else if (oldBoard.rows[MID] > this.rows[MID]) {
+			System.out.println((oldBoard.rows[MID] - this.rows[MID]) + " removed from row 2");
 		}
-		else if (oldBoard.rows[2] > this.rows[2]) {
-			System.out.println((oldBoard.rows[2] - this.rows[2]) + " removed from row 3");
+		else if (oldBoard.rows[LOW] > this.rows[LOW]) {
+			System.out.println((oldBoard.rows[LOW] - this.rows[LOW]) + " removed from row 3");
 		}
 		else {
 			System.out.println("No change!");
