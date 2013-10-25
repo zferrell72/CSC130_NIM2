@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eda121f2-1d2d-40db-b2b2-c10242969592" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nim/Player.java" afterPath="$PROJECT_DIR$/src/nim/Player.java" />
     </list>
     <ignored path="CSC130_NIM2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,8 +102,10 @@
       <file leaf-file-name="Player.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/nim/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="130" selection-start="62" selection-end="62" vertical-scroll-proportion="0.033975083">
-              <folding />
+            <state line="14" column="37" selection-start="334" selection-end="334" vertical-scroll-proportion="0.18686296">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -375,7 +377,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="477" y="52" width="1356" height="1028" extended-state="5" />
+    <frame x="477" y="52" width="1356" height="1028" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -481,7 +483,9 @@
     <entry file="file://$PROJECT_DIR$/src/nim/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="49" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -509,7 +513,9 @@
     <entry file="file://$PROJECT_DIR$/src/nim/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="49" selection-start="490" selection-end="490" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -537,7 +543,9 @@
     <entry file="file://$PROJECT_DIR$/src/nim/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="49" selection-start="490" selection-end="490" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -578,8 +586,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nim/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="130" selection-start="62" selection-end="62" vertical-scroll-proportion="0.033975083">
-          <folding />
+        <state line="14" column="37" selection-start="334" selection-end="334" vertical-scroll-proportion="0.18686296">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
