@@ -5,14 +5,50 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NimRunner {
-        private static Scanner input;
+        private static Scanner input = new Scanner(System.in);
         private static Computer comp = new Computer(), comp2 = new Computer();
         
         private enum Operations {
-        	HUMAN_HUMAN,
-        	HUMAN_COMP,
-        	COMP_COMP,
-        	LEARN;
+        	HUMAN_HUMAN("[0] Human vs Human"){
+        		public void operate(){
+        			HvH();
+        		}
+        	},
+        	HUMAN_COMP("[1] Human vs Computer"){
+        		public void operate(){
+        			HvC();
+        		}
+        	},
+        	COMP_COMP("[2] Computer vs Computer"){
+        		public void operate(){
+        			System.out.println("How many games would you like the game to play?");
+                    String choice = input.nextLine();
+                    int games = Integer.parseInt(choice);
+        			CvC(games);
+        		}
+        	},
+        	LEARN("[3] Learn"){
+        		public void operate(){
+        			Learn();
+        		}
+        	},
+        	EXIT("[4] Exit"){
+        		public void operate(){
+        			System.out.println("Exiting game...");
+        			System.exit(-1);
+        		}
+        	};
+        	
+        	private String text;
+        	Operations(String string){
+        		text = string;
+        	}
+        	
+        	public String getText(){
+        		return text;
+        	}
+        	
+        	public void operate(){}
         }
 
         public static void main(String args[])
@@ -22,47 +58,19 @@ public class NimRunner {
         
         public static void runMenu()
         {
-                input = new Scanner(System.in);
-                System.out.println("Please choose a game mode:\n[1]Human vs Human\n[2]Human vs Computer\n[3]Computer vs Computer\n[4]Learn\n[0]Exit");
-                int choice = -1;
-                
-                boolean done = false;
-                while(!done)
-                {
-                        done = true;
-                        
-                        try{choice = input.nextInt();}
-                        catch(InputMismatchException e)
-                        {
-                                choice = -1;
-                        }
-                        
-                        
-                        switch(choice)
-                        {
-                        case(0):
-                                System.exit(0);
-                        break;
-                        case(1):
-                                HvH();
-                        break;
-                        case(2):
-                                HvC();
-                        break;
-                        case(3):
-                                System.out.println("How many games would you like the game to play?");
-                                int games = input.nextInt();
-                                CvC(games);
-                        break;
-                        case(4):
-                                Learn();
-                        break;
-                        default:
-                                System.out.println("Invalid input. Please enter an integer 0-4.");
-                                done = false;
-                        break;
-                        }
-                }
+        	Operations[] menu = Operations.values();
+        	boolean isValid = false;
+        	
+        	while(!isValid){
+        		System.out.println("Please choose a game mode:");
+        		for(Operations operator : menu){
+        			System.out.println(operator.getText());
+        		}
+        		
+        		String choice = input.nextLine();
+        		int selection = Integer.parseInt(choice);
+        		menu[selection].operate();
+        	}   	
         }
         
         public static void HvH()
