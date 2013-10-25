@@ -1,5 +1,6 @@
 package nim;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
@@ -21,22 +22,22 @@ public class Player {
 			try
 			{
 				row = input.nextInt();
-				if(row > 3 || row < 1)
-					throw new Exception();
-				
-				if(board.getRow(row) == 0)
-				{
-					System.out.println("That row is already empty! Please try another.");
-					throw new Exception();
-				}
-				
-				inputIsValid = true;
 			}
-			catch(Exception e)
+			catch(InputMismatchException e)
 			{
-				System.err.println("Invalid Input");
-				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+				System.err.println("Invalid Input, Please choose an Integer");
 			}
+			
+			if(row > 3 || row < 1)
+			{
+				System.out.println("Invalid choice! Please choose a row between 1 and 3");
+			}
+			else if(board.getRow(row) == 0)
+			{
+				System.out.println("That row is already empty! Please try another.");
+			}
+			else
+				inputIsValid = true;
 		}
 		
 		return row;
@@ -52,18 +53,18 @@ public class Player {
 			try
 			{
 				x = input.nextInt();
-				if(x < 0 || x > board.getRow(row))
-				{
-					throw new Exception();
-				}
-				
-				inputIsValid = true;
 			}
-			catch(Exception e)
+			catch(InputMismatchException e)
 			{
-				System.err.println("Invalid Input");
-				System.out.println("You goofed. Please choose an integer between 1 and " + board.getRow(row));
+				System.err.println("Invalid Input. Please choose an Integer");
 			}
+			
+			if(x < 0 || x > board.getRow(row))
+			{
+				System.out.println("\nInvalid choice! please choose an integer between 1 and" + board.getRow(row) + "\n");
+			}
+			else
+				inputIsValid = true;
 		}
 		return x;
 	}
